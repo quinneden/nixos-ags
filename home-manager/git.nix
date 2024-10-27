@@ -1,16 +1,20 @@
+{secrets, ...}: 
 let
-  name = "Aylur";
-in {
+  name = "quinneden";
+in
+{
   programs.git = {
     enable = true;
     extraConfig = {
       color.ui = true;
-      core.editor = "nvim";
+      core.editor = "micro";
       credential.helper = "store";
       github.user = name;
       push.autoSetupRemote = true;
+      init.defaultBranch = "main";
+      url."https://oauth2:${secrets.github.api}@github.com".insteadOf = "https://github.com";
     };
-    userEmail = "k.demeter@protonmail.com";
+    userEmail = "quinnyxboy@gmail.com";
     userName = name;
   };
   programs.ssh = {

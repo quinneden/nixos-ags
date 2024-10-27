@@ -1,4 +1,5 @@
-{pkgs, ...}: let
+{ pkgs, ... }:
+let
   symlink = pkgs.writeShellScript "symlink" ''
     if [[ "$1" == "-r" ]]; then
       rm -rf "$HOME/.config/nvim"
@@ -13,21 +14,26 @@
       ln -s "$HOME/Projects/dotfiles/ags" "$HOME/.config/ags"
     fi
   '';
-  nx-switch = pkgs.writeShellScriptBin "nx-switch" ''
+  nix-switch = pkgs.writeShellScriptBin "nix-switch" ''
     ${symlink} -r
     sudo nixos-rebuild switch --flake . --impure $@
     ${symlink} -a
   '';
-  nx-boot = pkgs.writeShellScriptBin "nx-boot" ''
+  nix-boot = pkgs.writeShellScriptBin "nix-boot" ''
     ${symlink} -r
     sudo nixos-rebuild boot --flake . --impure $@
     ${symlink} -a
   '';
-  nx-test = pkgs.writeShellScriptBin "nx-test" ''
+  nix-test = pkgs.writeShellScriptBin "nix-test" ''
     ${symlink} -r
     sudo nixos-rebuild test --flake . --impure $@
     ${symlink} -a
   '';
-in {
-  home.packages = [nx-switch nx-boot nx-test];
+in
+{
+  home.packages = [
+    nix-switch
+    nix-boot
+    nix-test
+  ];
 }

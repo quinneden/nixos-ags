@@ -3,7 +3,8 @@
   lib,
   config,
   ...
-}: {
+}:
+{
   options.gnome = {
     enable = lib.mkEnableOption "Gnome";
   };
@@ -18,34 +19,32 @@
       ];
 
       gnome.excludePackages =
-        (with pkgs; [
-          # gnome-text-editor
-          gnome-console
-          gnome-photos
-          gnome-tour
-          gnome-connections
-          snapshot
-          gedit
+        with pkgs; [
+          atomix # puzzle game
           cheese # webcam tool
           epiphany # web browser
-          geary # email reader
           evince # document viewer
+          geary # email reader
+          gedit
+          gnome-characters
+          gnome-connections
+          gnome-console
+          gnome-contacts
+          gnome-font-viewer
+          gnome-initial-setup
+          gnome-maps
+          gnome-music
+          gnome-photos
+          gnome-shell-extensions
+          # gnome-text-editor
+          gnome-tour
+          hitori # sudoku game
+          iagno # go game
+          snapshot
+          tali # poker game
           totem # video player
           yelp # Help view
-          gnome-font-viewer
-        ])
-        ++ (with pkgs.gnome; [
-          gnome-music
-          gnome-characters
-          tali # poker game
-          iagno # go game
-          hitori # sudoku game
-          atomix # puzzle game
-          gnome-contacts
-          gnome-initial-setup
-          gnome-shell-extensions
-          gnome-maps
-        ]);
+        ];
     };
 
     services.xserver = {

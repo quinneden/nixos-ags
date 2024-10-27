@@ -1,12 +1,10 @@
+{ inputs, lib, secrets, ... }:
+let
+  username = "quinn";
+in
 {
-  inputs,
-  lib,
-  ...
-}: let
-  username = "demeter";
-in {
   imports = [
-    /etc/nixos/hardware-configuration.nix
+    ./hardware-configuration.nix
     ./system.nix
     ./audio.nix
     ./locale.nix
@@ -25,7 +23,7 @@ in {
     extraGroups = [
       "nixosvmtest"
       "networkmanager"
-      "wheel"
+      "wheel" 
       "audio"
       "video"
       "libvirtd"
@@ -37,12 +35,14 @@ in {
     backupFileExtension = "backup";
     useGlobalPkgs = true;
     useUserPackages = true;
-    extraSpecialArgs = {inherit inputs;};
+    extraSpecialArgs = {
+      inherit inputs secrets;
+    }; 
     users.${username} = {
       home.username = username;
       home.homeDirectory = "/home/${username}";
       imports = [
-        ../home-manager/nvim.nix
+        # ../home-manager/nvim.nix
         ../home-manager/ags.nix
         ../home-manager/blackbox.nix
         ../home-manager/browser.nix
@@ -52,8 +52,8 @@ in {
         ../home-manager/hyprland.nix
         ../home-manager/lf.nix
         ../home-manager/packages.nix
-        ../home-manager/sh.nix
-        ../home-manager/starship.nix
+        ../home-manager/zsh.nix
+        # ../home-manager/starship.nix
         ../home-manager/theme.nix
         ../home-manager/tmux.nix
         ../home-manager/wezterm.nix
@@ -64,7 +64,7 @@ in {
 
   specialisation = {
     gnome.configuration = {
-      system.nixos.tags = ["Gnome"];
+      system.nixos.tags = [ "Gnome" ];
       hyprland.enable = lib.mkForce false;
       gnome.enable = true;
     };

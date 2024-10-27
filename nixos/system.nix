@@ -1,20 +1,30 @@
-{pkgs, ...}: {
+{ pkgs, inputs, secrets, ... }:
+{
   # nix
   documentation.nixos.enable = false; # .desktop
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs = {
+    config.allowUnfree = true;
+    overlays = [ inputs.nixos-apple-silicon.overlays.default ];
+  };
   nix.settings = {
+    access-tokens = ["github=${secrets.github.token}"];
     experimental-features = "nix-command flakes";
     auto-optimise-store = true;
+    substituters = [
+      "https://cache.lix.systems"
+      "https://hyprland.cachix.org"
+    ];
+    trusted-public-keys = [
+      "cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o="
+      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+    ];
   };
-
-  # camera
-  programs.droidcam.enable = true;
 
   # virtualisation
   programs.virt-manager.enable = true;
   virtualisation = {
     podman.enable = true;
-    docker.enable = true;
+    # docker.enable = true;
     libvirtd.enable = true;
   };
 
@@ -24,18 +34,19 @@
   # packages
   environment.systemPackages = with pkgs; [
     home-manager
-    neovim
+    asahi-bless
     git
     wget
+    micro
   ];
 
   # services
   services = {
     xserver = {
       enable = true;
-      excludePackages = [pkgs.xterm];
+      excludePackages = [ pkgs.xterm ];
     };
-    printing.enable = true;
+    # printing.enable = true;
     flatpak.enable = true;
     openssh.enable = true;
   };
@@ -59,7 +70,20 @@
   };
 
   # network
-  networking.networkmanager.enable = true;
+  networking = {
+    wireless.iwd = {
+      enable = true;
+      settings = {
+        IPv6.Enabled = true;
+        Settings.AutoConnect = true;
+        General.EnableNetworkConfiguration = true;
+      };
+    };
+    networkmanager = {
+      enable = true;
+      wifi.backend = "iwd";
+    };
+  };
 
   # bluetooth
   hardware.bluetooth = {
@@ -71,13 +95,24 @@
   # bootloader
   boot = {
     tmp.cleanOnBoot = true;
-    supportedFilesystems = ["ntfs"];
     loader = {
       timeout = 2;
       systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
+      efi.canTouchEfiVariables = false;
     };
   };
 
-  system.stateVersion = "23.05";
+  hardware.asahi = {
+    enable = true;
+    setupAsahiSound = true;
+    useExperimentalGPUDriver = true;
+    experimentalGPUInstallMode = "replace";
+    extractPeripheralFirmware = true;
+    peripheralFirmwareDirectory = builtins.fetchTarball {
+      url = "https://qeden.me/fw/asahi-firmware-20241024.tar.gz";
+      sha256 = "sha256-KOBXP/nA3R1+/8ELTwsmmZ2MkX3lyfp4UTWeEpajWD8=";
+    };
+  };
+
+  system.stateVersion = "24.11";
 }

@@ -1,13 +1,15 @@
-{lib, ...}:
-with lib.hm.gvariant; {
+{ lib, ... }:
+with lib.hm.gvariant;
+{
   dconf.settings = {
     "org/gnome/desktop/input-sources" = {
-      sources = [(mkTuple ["xkb" "hu"])];
-      xkb-options = ["terminate:ctrl_alt_bksp"];
-    };
-
-    "org/gnome/desktop/interface" = {
-      show-battery-percentage = true;
+      sources = [
+        (mkTuple [
+          "xkb"
+          "us"
+        ])
+      ];
+      xkb-options = [ "terminate:ctrl_alt_bksp" ];
     };
 
     "org/gnome/desktop/peripherals/touchpad" = {
@@ -16,8 +18,8 @@ with lib.hm.gvariant; {
     };
 
     "org/gnome/desktop/search-providers" = {
-      disabled = ["org.gnome.Boxes.desktop"];
-      enabled = ["org.gnome.Weather.desktop"];
+      disabled = [ "org.gnome.Boxes.desktop" ];
+      enabled = [ "org.gnome.Weather.desktop" ];
       sort-order = [
         "org.gnome.Contacts.desktop"
         "org.gnome.Documents.desktop"
@@ -39,26 +41,26 @@ with lib.hm.gvariant; {
     };
 
     "org/gnome/desktop/wm/keybindings" = {
-      close = ["<Alt>q"];
-      move-to-workspace-1 = ["<Shift><Super>1"];
-      move-to-workspace-2 = ["<Shift><Super>2"];
-      move-to-workspace-3 = ["<Shift><Super>3"];
-      move-to-workspace-4 = ["<Shift><Super>4"];
-      move-to-workspace-5 = ["<Shift><Super>5"];
-      switch-to-workspace-1 = ["<Super>1"];
-      switch-to-workspace-2 = ["<Super>2"];
-      switch-to-workspace-3 = ["<Super>3"];
-      switch-to-workspace-4 = ["<Super>4"];
-      switch-to-workspace-5 = ["<Super>5"];
-      toggle-fullscreen = ["<Super>g"];
+      close = [ "<Alt>q" ];
+      move-to-workspace-1 = [ "<Shift><Super>1" ];
+      move-to-workspace-2 = [ "<Shift><Super>2" ];
+      move-to-workspace-3 = [ "<Shift><Super>3" ];
+      move-to-workspace-4 = [ "<Shift><Super>4" ];
+      move-to-workspace-5 = [ "<Shift><Super>5" ];
+      switch-to-workspace-1 = [ "<Super>1" ];
+      switch-to-workspace-2 = [ "<Super>2" ];
+      switch-to-workspace-3 = [ "<Super>3" ];
+      switch-to-workspace-4 = [ "<Super>4" ];
+      switch-to-workspace-5 = [ "<Super>5" ];
+      toggle-fullscreen = [ "<Super>f" ]; # g
     };
 
     "org/gnome/shell/keybindings" = {
-      switch-to-application-1 = [];
-      switch-to-application-2 = [];
-      switch-to-application-3 = [];
-      switch-to-application-4 = [];
-      switch-to-application-5 = [];
+      switch-to-application-1 = [ ];
+      switch-to-application-2 = [ ];
+      switch-to-application-3 = [ ];
+      switch-to-application-4 = [ ];
+      switch-to-application-5 = [ ];
     };
 
     "org/gnome/desktop/wm/preferences" = {
@@ -76,17 +78,19 @@ with lib.hm.gvariant; {
     };
 
     "org/gnome/settings-daemon/plugins/media-keys" = {
-      custom-keybindings = ["/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"];
-      mic-mute = ["AudioMicMute"];
-      next = ["AudioNext"];
-      play = ["AudioPlay"];
-      previous = ["AudioPrev"];
-      stop = ["AudioStop"];
-      volume-down = ["AudioLowerVolume"];
-      volume-up = ["AudioRaiseVolume"];
+      custom-keybindings = [
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+      ];
+      mic-mute = [ "AudioMicMute" ];
+      next = [ "AudioNext" ];
+      play = [ "AudioPlay" ];
+      previous = [ "AudioPrev" ];
+      stop = [ "AudioStop" ];
+      volume-down = [ "AudioLowerVolume" ];
+      volume-up = [ "AudioRaiseVolume" ];
 
-      home = ["<Super>e"];
-      www = ["<Super>w"];
+      home = [ "<Super>e" ];
+      www = [ "<Super>w" ];
     };
 
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
@@ -95,24 +99,11 @@ with lib.hm.gvariant; {
       name = "term";
     };
 
-    "org/gnome/settings-daemon/plugins/power" = {
-      idle-dim = false;
-      power-button-action = "interactive";
-      sleep-inactive-ac-type = "nothing";
-      sleep-inactive-battery-type = "nothing";
-    };
-
     "org/gnome/shell" = {
       favorite-apps = [
         "firefox.desktop"
         "org.wezfurlong.wezterm.desktop"
         "org.gnome.Nautilus.desktop"
-        "org.gnome.Calendar.desktop"
-        "obsidian.desktop"
-        "caprine.desktop"
-        "teams-for-linux.desktop"
-        "discord.desktop"
-        "spotify.desktop"
         "com.usebottles.bottles.desktop"
         "org.gnome.Software.desktop"
       ];
@@ -123,16 +114,12 @@ with lib.hm.gvariant; {
     };
 
     "system/locale" = {
-      region = "hu_HU.UTF-8";
+      region = "en_US.UTF-8";
     };
 
     "org/virt-manager/virt-manager/connections" = {
-      autoconnect = ["qemu:///system"];
-      uris = ["qemu:///system"];
-    };
-
-    "org/gnome/TextEditor" = {
-      keybindings = "vim";
+      autoconnect = [ "qemu:///system" ];
+      uris = [ "qemu:///system" ];
     };
   };
 }

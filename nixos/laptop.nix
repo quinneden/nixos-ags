@@ -1,8 +1,5 @@
+{ config, lib, ... }:
 {
-  config,
-  lib,
-  ...
-}: {
   options.asusLaptop = {
     enable = lib.mkEnableOption "Asus Laptop";
   };
@@ -21,7 +18,7 @@
       driSupport32Bit = true;
     };
 
-    services.xserver.videoDrivers = ["nvidia"];
+    services.xserver.videoDrivers = [ "nvidia" ];
 
     hardware.nvidia = {
       prime = {

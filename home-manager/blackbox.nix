@@ -1,30 +1,38 @@
+{ pkgs, lib, ... }:
 {
-  pkgs,
-  lib,
-  ...
-}: {
-  imports = [./modules/blackbox.nix];
+  imports = [ ./modules/blackbox.nix ];
 
   terminals.blackbox = {
     enable = true;
 
-    alias = ["xterm" "kgx" "gnome-terminal"];
+    alias = [
+      "xterm"
+      "kgx"
+      "gnome-terminal"
+    ];
     sessionVariable = true;
 
     settings = {
       command-as-login-shell = true;
       custom-shell-command = "${pkgs.tmux}/bin/tmux";
       use-custom-command = true;
-      font = "CaskaydiaCove Nerd Font 12";
+      font = "CaskaydiaCove Nerd Font 14";
       fill-tabs = true;
       show-headerbar = false;
       pretty = true;
       theme-light = "Adwaita";
       theme-dark = "Charmful";
-      terminal-padding = with lib.hm.gvariant; let
-        p = mkUint32 18;
-      in
-        mkTuple [p p p p];
+      terminal-padding =
+        with lib.hm.gvariant;
+        let
+          p = mkUint32 18;
+        in
+        mkTuple [
+          p
+          p
+          p
+          p
+        ];
     };
 
     colors = {

@@ -1,27 +1,20 @@
-{
-  inputs,
-  pkgs,
-  ...
-}: let
+{ inputs, pkgs, ... }:
+let
   hyprland = inputs.hyprland.packages.${pkgs.system}.hyprland;
   # plugins = inputs.hyprland-plugins.packages.${pkgs.system};
-
-  yt = pkgs.writeShellScript "yt" ''
-    notify-send "Opening video" "$(wl-paste)"
-    mpv "$(wl-paste)"
-  '';
 
   playerctl = "${pkgs.playerctl}/bin/playerctl";
   brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
   pactl = "${pkgs.pulseaudio}/bin/pactl";
   screenshot = import ./scripts/screenshot.nix pkgs;
-in {
+in
+{
   xdg.desktopEntries."org.gnome.Settings" = {
     name = "Settings";
     comment = "Gnome Control Center";
     icon = "org.gnome.Settings";
-    exec = "env XDG_CURRENT_DESKTOP=gnome ${pkgs.gnome.gnome-control-center}/bin/gnome-control-center";
-    categories = ["X-Preferences"];
+    exec = "env XDG_CURRENT_DESKTOP=gnome ${pkgs.gnome-control-center}/bin/gnome-control-center";
+    categories = [ "X-Preferences" ];
     terminal = false;
   };
 
@@ -41,7 +34,6 @@ in {
       exec-once = [
         "ags -b hypr"
         "hyprctl setcursor Qogir 24"
-        "fragments"
       ];
 
       monitor = [
@@ -61,14 +53,15 @@ in {
       };
 
       input = {
-        kb_layout = "hu,us";
+        kb_layout = "us";
         follow_mouse = 1;
+        repeat_delay = 250;
+        repeat_rate = 40;
         touchpad = {
           natural_scroll = "yes";
-          disable_while_typing = true;
           drag_lock = true;
         };
-        sensitivity = 0;
+        sensitivity = 0.1;
         float_switch_override_focus = 2;
       };
 
@@ -79,7 +72,6 @@ in {
       dwindle = {
         pseudotile = "yes";
         preserve_split = "yes";
-        # no_gaps_when_only = "yes";
       };
 
       gestures = {
@@ -87,34 +79,46 @@ in {
         workspace_swipe_use_r = true;
       };
 
-      windowrule = let
-        f = regex: "float, ^(${regex})$";
-      in [
-        (f "org.gnome.Calculator")
-        (f "org.gnome.Nautilus")
-        (f "pavucontrol")
-        (f "nm-connection-editor")
-        (f "blueberry.py")
-        (f "org.gnome.Settings")
-        (f "org.gnome.design.Palette")
-        (f "Color Picker")
-        (f "xdg-desktop-portal")
-        (f "xdg-desktop-portal-gnome")
-        (f "de.haeckerfelix.Fragments")
-        (f "com.github.Aylur.ags")
-        "workspace 7, title:Spotify"
-      ];
+      windowrule =
+        let
+          f = regex: "float, ^(${regex})$";
+        in
+        [
+          (f "org.gnome.Calculator")
+          (f "org.gnome.Nautilus")
+          (f "pavucontrol")
+          (f "nm-connection-editor")
+          (f "blueberry.py")
+          (f "org.gnome.Settings")
+          (f "org.gnome.design.Palette")
+          (f "Color Picker")
+          (f "xdg-desktop-portal")
+          (f "xdg-desktop-portal-gnome")
+          (f "de.haeckerfelix.Fragments")
+          (f "com.github.Aylur.ags")
+        ];
 
-      bind = let
-        binding = mod: cmd: key: arg: "${mod}, ${key}, ${cmd}, ${arg}";
-        mvfocus = binding "SUPER" "movefocus";
-        ws = binding "SUPER" "workspace";
-        resizeactive = binding "SUPER CTRL" "resizeactive";
-        mvactive = binding "SUPER ALT" "moveactive";
-        mvtows = binding "SUPER SHIFT" "movetoworkspace";
-        e = "exec, ags -b hypr";
-        arr = [1 2 3 4 5 6 7];
-      in
+      bind =
+        let
+          binding =
+            mod: cmd: key: arg:
+            "${mod}, ${key}, ${cmd}, ${arg}";
+          mvfocus = binding "SUPER" "movefocus";
+          ws = binding "SUPER" "workspace";
+          resizeactive = binding "SUPER CTRL" "resizeactive";
+          mvactive = binding "SUPER ALT" "moveactive";
+          mvtows = binding "SUPER SHIFT" "movetoworkspace";
+          e = "exec, ags -b hypr";
+          arr = [
+            1
+            2
+            3
+            4
+            5
+            6
+            7
+          ];
+        in
         [
           "CTRL SHIFT, R,  ${e} quit; ags -b hypr"
           "SUPER, R,       ${e} -t launcher"
@@ -127,33 +131,30 @@ in {
           "SUPER, W, exec, firefox"
           "SUPER, E, exec, wezterm -e lf"
 
-          # youtube
-          ", XF86Launch1,  exec, ${yt}"
-
           "ALT, Tab, focuscurrentorlast"
           "CTRL ALT, Delete, exit"
-          "ALT, Q, killactive"
-          "SUPER, F, togglefloating"
-          "SUPER, G, fullscreen"
+          "SUPER, Q, killactive"
+          "SUPER, G, togglefloating"
+          "SUPER, F, fullscreen"
           "SUPER, O, fakefullscreen"
           "SUPER, P, togglesplit"
 
-          (mvfocus "k" "u")
-          (mvfocus "j" "d")
-          (mvfocus "l" "r")
-          (mvfocus "h" "l")
+          (mvfocus "up" "u")
+          (mvfocus "down" "d")
+          (mvfocus "right" "r")
+          (mvfocus "left" "l")
           (ws "left" "e-1")
           (ws "right" "e+1")
           (mvtows "left" "e-1")
           (mvtows "right" "e+1")
-          (resizeactive "k" "0 -20")
-          (resizeactive "j" "0 20")
-          (resizeactive "l" "20 0")
-          (resizeactive "h" "-20 0")
-          (mvactive "k" "0 -20")
-          (mvactive "j" "0 20")
-          (mvactive "l" "20 0")
-          (mvactive "h" "-20 0")
+          (resizeactive "up" "0 -20")
+          (resizeactive "down" "0 20")
+          (resizeactive "right" "20 0")
+          (resizeactive "left" "-20 0")
+          (mvactive "up" "0 -20")
+          (mvactive "down" "0 20")
+          (mvactive "right" "20 0")
+          (mvactive "left" "-20 0")
         ]
         ++ (map (i: ws (toString i) (toString i)) arr)
         ++ (map (i: mvtows (toString i) (toString i)) arr);
@@ -161,8 +162,6 @@ in {
       bindle = [
         ",XF86MonBrightnessUp,   exec, ${brightnessctl} set +5%"
         ",XF86MonBrightnessDown, exec, ${brightnessctl} set  5%-"
-        ",XF86KbdBrightnessUp,   exec, ${brightnessctl} -d asus::kbd_backlight set +1"
-        ",XF86KbdBrightnessDown, exec, ${brightnessctl} -d asus::kbd_backlight set  1-"
         ",XF86AudioRaiseVolume,  exec, ${pactl} set-sink-volume @DEFAULT_SINK@ +5%"
         ",XF86AudioLowerVolume,  exec, ${pactl} set-sink-volume @DEFAULT_SINK@ -5%"
       ];
@@ -194,7 +193,7 @@ in {
           size = 8;
           passes = 3;
           new_optimizations = "on";
-          noise = 0.01;
+          noise = 1.0e-2;
           contrast = 0.9;
           brightness = 0.8;
           popups = true;

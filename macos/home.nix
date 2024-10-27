@@ -1,8 +1,5 @@
+{ pkgs, config, ... }:
 {
-  pkgs,
-  config,
-  ...
-}: {
   imports = [
     ../home-manager/git.nix
     ../home-manager/lf.nix
@@ -32,17 +29,19 @@
 
   fonts.fontconfig.enable = true;
 
-  home.packages = let
-    nerdfonts = pkgs.nerdfonts.override {
-      fonts = [
-        "Ubuntu"
-        "UbuntuMono"
-        "CascadiaCode"
-        "FantasqueSansMono"
-        "FiraCode"
-      ];
-    };
-  in [nerdfonts];
+  home.packages =
+    let
+      nerdfonts = pkgs.nerdfonts.override {
+        fonts = [
+          "Ubuntu"
+          "UbuntuMono"
+          "CascadiaCode"
+          "FantasqueSansMono"
+          "FiraCode"
+        ];
+      };
+    in
+    [ nerdfonts ];
 
   home.sessionVariables = {
     EDITOR = "nvim";
@@ -55,7 +54,10 @@
   };
 
   nix.settings = {
-    experimental-features = ["nix-command" "flakes"];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
     warn-dirty = false;
   };
 
