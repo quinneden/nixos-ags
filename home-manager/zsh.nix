@@ -76,7 +76,7 @@ in
         "eza"
         "zoxide"
         "direnv"
-        "nix-zsh-completions"
+        # "nix-zsh-completions"
       ];
       custom = "${config.xdg.configHome}/zsh";
     };

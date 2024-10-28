@@ -17,7 +17,6 @@
           ".config/starship.toml"
         ];
         packages = config.packages.cli ++ [
-          config.programs.neovim.finalPackage
           pkgs.nix
           pkgs.git
         ];

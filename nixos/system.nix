@@ -20,6 +20,11 @@
     ];
   };
 
+  zramSwap = {
+    enable = true;
+    memoryPercent = 100;
+  };
+
   # virtualisation
   programs.virt-manager.enable = true;
   virtualisation = {
@@ -40,13 +45,14 @@
     micro
   ];
 
+  security.sudo.wheelNeedsPassword = false;
+
   # services
   services = {
     xserver = {
       enable = true;
       excludePackages = [ pkgs.xterm ];
     };
-    # printing.enable = true;
     flatpak.enable = true;
     openssh.enable = true;
   };

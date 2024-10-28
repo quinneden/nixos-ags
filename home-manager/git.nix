@@ -12,7 +12,7 @@ in
       github.user = name;
       push.autoSetupRemote = true;
       init.defaultBranch = "main";
-      url."https://oauth2:${secrets.github.api}@github.com".insteadOf = "https://github.com";
+      url."https://oauth2:${secrets.github.token}@github.com".insteadOf = "https://github.com";
     };
     userEmail = "quinnyxboy@gmail.com";
     userName = name;

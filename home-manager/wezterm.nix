@@ -95,7 +95,7 @@
       };
 
       settings = {
-        enable_wayland = false;
+        enable_wayland = true;
         color_schemes = {
           "Gnome Light" = gnome-light;
           "Charmful Dark" = charmful-dark;
@@ -103,6 +103,8 @@
         color_scheme = "Charmful Dark";
         cell_width = 0.9;
         default_cursor_style = "BlinkingBar";
+
+        # front_end = "WebGpu";
 
         window_close_confirmation = "NeverPrompt";
         hide_tab_bar_if_only_one_tab = true;

@@ -3,7 +3,6 @@
   imports = [
     ./modules/packages.nix
     ./scripts/blocks.nix
-    ./scripts/nix-switch.nix
     ./scripts/vault.nix
   ];
 
@@ -21,6 +20,7 @@
       inputs.nix-shell-scripts.packages.aarch64-linux.default
       nh
       nodejs
+      vagrant
     ];
     cli = [
       bat
@@ -29,6 +29,7 @@
       fzf
       gh
       git-crypt
+      git-lfs
       glow
       gnumake
       gnupg
@@ -37,6 +38,7 @@
       lazygit
       nixfmt-rfc-style
       pure-prompt
+      python3
       rclone
       ripgrep
       zoxide
