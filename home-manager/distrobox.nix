@@ -7,12 +7,10 @@
 
     boxes =
       let
-        exec = "${pkgs.nushell}/bin/nu";
+        exec = "${pkgs.zsh}/bin/zsh";
         symlinks = [
           ".bashrc"
           ".zshrc"
-          ".config/nushell"
-          ".config/nvim"
           ".config/nix"
           ".config/starship.toml"
         ];
@@ -22,13 +20,9 @@
         ];
       in
       {
-        Alpine = {
-          inherit exec symlinks;
-          img = "docker.io/library/alpine:latest";
-        };
         Fedora = {
           inherit exec symlinks;
-          packages = "nodejs npm poetry gcc mysql-devel python3-devel wl-clipboard";
+          packages = "nodejs npm poetry gcc python3-devel wl-clipboard rustup llvm p7zip p7zip-plugins";
           img = "registry.fedoraproject.org/fedora-toolbox:rawhide";
           nixPackages = packages ++ [
             (pkgs.writeShellScriptBin "pr" "poetry run $@")

@@ -1,4 +1,9 @@
-{ inputs, lib, secrets, ... }:
+{
+  inputs,
+  lib,
+  secrets,
+  ...
+}:
 let
   username = "quinn";
 in
@@ -9,13 +14,12 @@ in
     ./audio.nix
     ./locale.nix
     ./nautilus.nix
-    ./laptop.nix
     ./hyprland.nix
     ./gnome.nix
+    # ./overlays.nix
   ];
 
   hyprland.enable = true;
-  asusLaptop.enable = false;
 
   users.users.${username} = {
     isNormalUser = true;
@@ -23,7 +27,7 @@ in
     extraGroups = [
       "nixosvmtest"
       "networkmanager"
-      "wheel" 
+      "wheel"
       "audio"
       "video"
       "libvirtd"
@@ -31,18 +35,23 @@ in
     ];
   };
 
+  environment.pathsToLink = [
+    "/share/zsh"
+    "/share/qemu"
+    "/share/edk2"
+  ];
+
   home-manager = {
     backupFileExtension = "backup";
     useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = {
       inherit inputs secrets;
-    }; 
+    };
     users.${username} = {
       home.username = username;
       home.homeDirectory = "/home/${username}";
       imports = [
-        # ../home-manager/nvim.nix
         ../home-manager/ags.nix
         ../home-manager/blackbox.nix
         ../home-manager/browser.nix
@@ -53,11 +62,11 @@ in
         ../home-manager/lf.nix
         ../home-manager/packages.nix
         ../home-manager/zsh.nix
-        # ../home-manager/starship.nix
         ../home-manager/theme.nix
         ../home-manager/tmux.nix
         ../home-manager/wezterm.nix
         ../home-manager/micro.nix
+        ../home-manager/vscodium.nix
         ./home.nix
       ];
     };

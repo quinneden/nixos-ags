@@ -87,7 +87,7 @@
     in
     {
       enable = true;
-      font = "CaskaydiaCove NF";
+      font = "CaskaydiaCove Nerd Font";
 
       themes = {
         Dark = "Charmful Dark";
@@ -95,7 +95,7 @@
       };
 
       settings = {
-        enable_wayland = true;
+        enable_wayland = false;
         color_schemes = {
           "Gnome Light" = gnome-light;
           "Charmful Dark" = charmful-dark;
@@ -150,7 +150,7 @@
         wezterm.on("toggle-opacity", function(window)
         	local overrides = window:get_config_overrides() or {}
         	if not overrides.window_background_opacity then
-        		overrides.window_background_opacity = 0.75
+        		overrides.window_background_opacity = 0.7
         	else
         		overrides.window_background_opacity = nil
         	end

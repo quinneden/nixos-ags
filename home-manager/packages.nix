@@ -9,18 +9,12 @@
   packages = with pkgs; {
     linux = [
       (mpv.override { scripts = [ mpvScripts.mpris ]; })
-      # figma-linux
-      # gnome-secrets
-      # spotify
-      # wine-staging
-      # yabridge
-      # yabridgectl
       asahi-bless
       fragments
       inputs.nix-shell-scripts.packages.aarch64-linux.default
       nh
       nodejs
-      vagrant
+      (vagrant.override { withLibvirt = false; })
     ];
     cli = [
       bat

@@ -1,6 +1,6 @@
 let
   mod = "Mod4";
-  # alt = "Mod1";
+# alt = "Mod1";
 in
 {
   wayland.windowManager.sway = {

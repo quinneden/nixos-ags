@@ -1,4 +1,4 @@
-{secrets, ...}: 
+{ secrets, ... }:
 let
   name = "quinneden";
 in

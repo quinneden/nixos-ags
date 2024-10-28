@@ -1,13 +1,19 @@
-{ pkgs, inputs, secrets, ... }:
+{
+  pkgs,
+  inputs,
+  secrets,
+  ...
+}:
 {
   # nix
   documentation.nixos.enable = false; # .desktop
+
   nixpkgs = {
     config.allowUnfree = true;
-    overlays = [ inputs.nixos-apple-silicon.overlays.default ];
   };
+
   nix.settings = {
-    access-tokens = ["github=${secrets.github.token}"];
+    access-tokens = [ "github=${secrets.github.token}" ];
     experimental-features = "nix-command flakes";
     auto-optimise-store = true;
     substituters = [
