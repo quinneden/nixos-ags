@@ -19,6 +19,7 @@
     johnnymorganz.stylua
     rvest.vs-code-prettier-eslint
     rust-lang.rust-analyzer
+    jnoortheen.nix-ide
   ])
   ++
   (with open-vsx; [

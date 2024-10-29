@@ -14,6 +14,7 @@
       inputs.nix-shell-scripts.packages.aarch64-linux.default
       nh
       nodejs
+      nil
       (vagrant.override { withLibvirt = false; })
     ];
     cli = [

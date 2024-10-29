@@ -40,6 +40,14 @@ let
       key = "meta+shift+f";
       command = "workbench.action.findInFiles";
     }
+    {
+      key = "alt+left";
+      command = "workbench.action.focusPreviousGroup";
+    }
+    {
+      key = "alt+right";
+      command = "workbench.action.focusNextGroup";
+    }
   ];
 in
 [ ] ++ keybindings
