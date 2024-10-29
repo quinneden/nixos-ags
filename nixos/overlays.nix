@@ -53,6 +53,6 @@ in
       miscOverlays
     ])
     ++ (with inputs; [
-      nixos-apple-silicon.overlays.default
+      nixos-asahi.overlays.default
     ]);
 }

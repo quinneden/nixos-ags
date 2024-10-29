@@ -6,8 +6,8 @@
 
     lix-module.url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.0.tar.gz";
 
-    nixos-apple-silicon = {
-      url = "github:tpwrules/nixos-apple-silicon";
+    nixos-asahi = {
+      url = "github:zzywysm/nixos-asahi";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -76,7 +76,7 @@
             ./nixos/nixos.nix
             home-manager.nixosModules.home-manager
             inputs.lix-module.nixosModules.default
-            inputs.nixos-apple-silicon.nixosModules.default
+            inputs.nixos-asahi.nixosModules.default
             { networking.hostName = "nixos-macmini"; }
           ];
         };

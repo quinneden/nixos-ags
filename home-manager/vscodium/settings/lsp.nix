@@ -10,7 +10,9 @@
   "nix.formatterPath" = lib.getExe pkgs.nixfmt-rfc-style;
   "nix.serverSettings.nil" = {
     "formatting.command" = ["nixfmt"];
-    "diagnostics.ignored": ["unused_binding"];
+    "diagnostics" = {
+      "ignored" = ["unused_binding"];
+    };
   };
   "zig.path" = lib.getExe pkgs.zig;
   "zig.initialSetupDone" = true;
