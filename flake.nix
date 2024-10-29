@@ -64,7 +64,7 @@
 
       # nixos config
       nixosConfigurations = {
-        "nixos" = nixpkgs.lib.nixosSystem {
+        nixos-macmini = nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
           specialArgs = {
             inherit inputs secrets;
@@ -76,27 +76,6 @@
             inputs.lix-module.nixosModules.default
             inputs.nixos-apple-silicon.nixosModules.default
             { networking.hostName = "nixos-macmini"; }
-          ];
-        };
-      };
-
-      # macos hm config
-      homeConfigurations = {
-        "demeter" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-          extraSpecialArgs = {
-            inherit inputs;
-          };
-          modules = [
-            (
-              { pkgs, ... }:
-              {
-                nix.package = pkgs.nix;
-                home.username = "demeter";
-                home.homeDirectory = "/Users/demeter";
-                imports = [ ./macos/home.nix ];
-              }
-            )
           ];
         };
       };

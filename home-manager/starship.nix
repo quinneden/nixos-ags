@@ -12,6 +12,7 @@
         "$git_status"
         "$cmd_duration"
         "$line_break"
+        "$space"
         "$python"
         "$character"
       ];
@@ -19,9 +20,14 @@
         style = "blue";
       };
 
-      directory.substitutions = {
-        "~" = "homedir";
+      custom.space = {
+        when = ''! test $TERM_PROGRAM == "vscode"'';
+        format = "  ";
       };
+
+      # directory.substitutions = {
+      #   "~" = "homedir";
+      # };
 
       character = {
         success_symbol = "[❯](purple)";

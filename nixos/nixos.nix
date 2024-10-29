@@ -2,6 +2,7 @@
   inputs,
   lib,
   secrets,
+  pkgs,
   ...
 }:
 let
@@ -34,6 +35,23 @@ in
       "docker"
     ];
   };
+
+  programs.nh = {
+    enable = true;
+    flake = /home/${username}/.dotfiles;
+  };
+
+  programs.direnv = {
+    enable = true;
+    silent = false;
+    enableZshIntegration = true;
+    loadInNixShell = true;
+    nix-direnv = {
+      enable = true;
+      package = pkgs.nix-direnv;
+    };
+  };
+
 
   environment.pathsToLink = [
     "/share/zsh"

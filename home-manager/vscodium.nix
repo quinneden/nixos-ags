@@ -6,13 +6,11 @@
     extensions = with pkgs.vscode-extensions; [
       # pr1sm8.theme-panda
       jeff-hykin.better-nix-syntax
-      kamadorueda.alejandra
       mkhl.direnv
     ];
     userSettings = {
-      "alejandra.program" = "alejandra";
       "breadcrumbs.enabled" = true;
-      "editor.fontFamily" = "'CaskaydiaCove NF'";
+      "editor.fontFamily" = "'CaskaydiaCove Nerd Font'";
       "editor.fontLigatures" = true;
       "editor.fontSize" = 15;
       "editor.formatOnPaste" = true;
@@ -41,11 +39,12 @@
       "workbench.statusBar.visible" = true;
       "window.customTitleBarVisibility" = "auto";
       "editor.tabSize" = 2;
-      "terminal.integrated.fontFamily" = "'CaskaydiaCove NF'";
-      "terminal.integrated.fontSize" = "16";
+      "terminal.integrated.fontFamily" = "'CaskaydiaCove Nerd Font'";
+      "terminal.integrated.fontSize" = "14";
       "terminal.integrated.fontWeight" = "300";
       "terminal.integrated.fontWeightBold" = "500";
       "terminal.integrated.defaultProfile.linux" = "zsh";
+      "terminal.integrated.shellIntegration.decorationsEnabled" = "false";
     };
     keybindings = [
       {
