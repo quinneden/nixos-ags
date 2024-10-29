@@ -84,7 +84,7 @@ in
         ../home-manager/tmux.nix
         ../home-manager/wezterm.nix
         ../home-manager/micro.nix
-        ../home-manager/vscodium.nix
+        ../home-manager/vscodium
         ./home.nix
       ];
     };

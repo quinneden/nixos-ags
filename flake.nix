@@ -43,6 +43,8 @@
     };
 
     nix-shell-scripts.url = "github:quinneden/nix-shell-scripts";
+
+    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
   };
 
   outputs =
