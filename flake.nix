@@ -6,8 +6,13 @@
 
     lix-module.url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.0.tar.gz";
 
+    # nixos-asahi = {
+    #   url = "github:zzywysm/nixos-asahi";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+
     nixos-asahi = {
-      url = "github:zzywysm/nixos-asahi";
+      url = "github:tpwrules/nixos-apple-silicon";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

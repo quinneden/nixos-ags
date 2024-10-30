@@ -17,7 +17,7 @@ in
     ./nautilus.nix
     ./hyprland.nix
     ./gnome.nix
-    # ./overlays.nix
+    ./overlays.nix
   ];
 
   hyprland.enable = true;

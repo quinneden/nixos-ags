@@ -36,6 +36,7 @@
       python3
       rclone
       ripgrep
+      udiskie
       zoxide
     ];
   };

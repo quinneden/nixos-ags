@@ -8,10 +8,14 @@
   "nix.enableLanguageServer" = true;
   "nix.serverPath" = lib.getExe pkgs.nil;
   "nix.formatterPath" = lib.getExe pkgs.nixfmt-rfc-style;
-  "nix.serverSettings.nil" = {
-    "formatting.command" = ["nixfmt"];
-    "diagnostics" = {
-      "ignored" = ["unused_binding"];
+  "nix.serverSettings" = {
+    "nil" = {
+      "formatting" = {
+        "command" = ["nixfmt"];
+      };
+      "diagnostics" = {
+        "ignored" = ["unused_binding"];
+      };
     };
   };
   "zig.path" = lib.getExe pkgs.zig;
