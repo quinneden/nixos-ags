@@ -22,6 +22,7 @@
       eza
       fd
       fzf
+      gptfdisk
       gh
       git-crypt
       git-lfs

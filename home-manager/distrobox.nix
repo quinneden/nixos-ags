@@ -10,7 +10,7 @@
         exec = "${pkgs.zsh}/bin/zsh";
         symlinks = [
           ".bashrc"
-          ".zshrc"
+          ".zshenv"
           ".config/nix"
           ".config/starship.toml"
         ];
