@@ -33,6 +33,7 @@ in
             "IosevkaTerm"
             "Iosevka"
             "NerdFontsSymbolsOnly"
+            "NotoSans"
           ];
         };
       };
@@ -49,11 +50,10 @@ in
         };
     in
     ([
-      # fontsOverlays
+      fontsOverlays
       # miscOverlays
     ])
     ++ (with inputs; [
       nixos-asahi.overlays.default
-      nix-shell-scripts.overlays.aarch64-linux.default
     ]);
 }
